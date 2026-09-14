@@ -7,6 +7,7 @@
 document.addEventListener('DOMContentLoaded', () => {
   // ─── State Management ───────────────────────────────────────────────────
   let currentStep = 1;
+  const totalSteps = 5;
   // Resolve backend API URL intelligently across local, LAN (mobile), and production (Render)
   let API_BASE_URL = '';
   if (window.location.protocol === 'file:') {
