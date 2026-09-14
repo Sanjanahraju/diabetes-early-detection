@@ -7,8 +7,13 @@
 document.addEventListener('DOMContentLoaded', () => {
   // ─── State Management ───────────────────────────────────────────────────
   let currentStep = 1;
-  const totalSteps = 5;
-  const API_BASE_URL = (window.location.origin && window.location.origin.includes(':5000')) ? '' : 'http://localhost:5000';
+  // Resolve backend API URL intelligently across local, LAN (mobile), and production (Render)
+  let API_BASE_URL = '';
+  if (window.location.protocol === 'file:') {
+    API_BASE_URL = 'http://localhost:5000';
+  } else if (window.location.port && window.location.port !== '5000') {
+    API_BASE_URL = `${window.location.protocol}//${window.location.hostname}:5000`;
+  }
 
   // ─── DOM References ─────────────────────────────────────────────────────
   const form = document.getElementById('diabetes-form');
@@ -336,11 +341,15 @@ document.addEventListener('DOMContentLoaded', () => {
         });
       } catch (networkErr) {
         // In case the API is running on same origin or port
-        response = await fetch('/predict', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload)
-        });
+        if (API_BASE_URL) {
+          response = await fetch('/predict', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+          });
+        } else {
+          throw networkErr;
+        }
       }
 
       if (!response.ok) {
@@ -356,14 +365,9 @@ document.addEventListener('DOMContentLoaded', () => {
       loadingOverlay.classList.remove('active');
       goToStep(5);
     } catch (err) {
-      console.warn('Backend connection failed, falling back to embedded clinical rule engine:', err);
-      loadingMessage.textContent = 'Generating local clinical simulation...';
-      setTimeout(() => {
-        const simulated = generateSimulatedPrediction(payload);
-        renderResults(simulated, payload);
-        loadingOverlay.classList.remove('active');
-        goToStep(5);
-      }, 700);
+      console.error('Prediction request failed:', err);
+      loadingOverlay.classList.remove('active');
+      alert('Unable to connect to the prediction server. Please try again.');
     }
   });
 
@@ -607,8 +611,17 @@ document.addEventListener('DOMContentLoaded', () => {
   // ─── Fetch Trained Model Metadata on Startup ───────────────────────────
   async function fetchModelMetadata() {
     try {
-      const res = await fetch(`${API_BASE_URL}/model-info`);
-      if (res.ok) {
+      let res;
+      try {
+        res = await fetch(`${API_BASE_URL}/model-info`);
+      } catch (netErr) {
+        if (API_BASE_URL) {
+          res = await fetch('/model-info');
+        } else {
+          throw netErr;
+        }
+      }
+      if (res && res.ok) {
         const info = await res.json();
         const modelNameEl = document.getElementById('meta-model-name');
         const accEl = document.getElementById('meta-accuracy');
