@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
-    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Outfit:wght@500;600;700;800;900&family=Space+Grotesk:wght@500;600;700&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Outfit:wght@500;600;700;800;900&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@500;600;700&display=swap"
     rel="stylesheet">
 </head>
 
@@ -202,6 +202,20 @@
               <div class="model-info-label">Calculated Body Mass Index (BMI)</div>
               <div class="bmi-value bmi-normal" id="bmi-value-display">24.2 kg/m²</div>
               <div class="bmi-category bmi-normal" id="bmi-category-display">Normal Weight</div>
+              <div class="bmi-spectrum" aria-hidden="true">
+                <div class="bmi-spectrum-bar">
+                  <span class="bmi-seg seg-under" title="Underweight (&lt;18.5)"></span>
+                  <span class="bmi-seg seg-normal" title="Normal (18.5–24.9)"></span>
+                  <span class="bmi-seg seg-over" title="Overweight (25.0–29.9)"></span>
+                  <span class="bmi-seg seg-obese" title="Obese (≥30.0)"></span>
+                </div>
+                <div class="bmi-spectrum-labels">
+                  <span>&lt;18.5</span>
+                  <span>18.5–24.9</span>
+                  <span>25–29.9</span>
+                  <span>≥30</span>
+                </div>
+              </div>
               <input type="hidden" id="input-bmi" value="24.2">
             </div>
 
