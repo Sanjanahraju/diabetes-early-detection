@@ -1,565 +1,1117 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>DiaRisk AI — Clinical Early Detection & Precision Risk Intelligence</title>
+  <title>DiaRisk AI — Early Prediction of Type 2 Diabetes Mellitus</title>
   <meta name="description"
-    content="State-of-the-art clinical machine learning intelligence for early detection, risk stratification, and personalized preventive care for Type 2 Diabetes Mellitus.">
+    content="Clinical machine learning decision support for early detection, precision risk stratification, and preventive guidance for Type 2 Diabetes Mellitus.">
   <link rel="stylesheet" href="style.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
-    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Outfit:wght@500;600;700;800;900&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@500;600;700&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Outfit:wght@500;600;700;800;900&display=swap"
     rel="stylesheet">
+  <!-- Theme Flash Prevention -->
+  <script>
+    (function () {
+      var savedTheme = localStorage.getItem('diarisk_theme') || 'light';
+      document.documentElement.setAttribute('data-theme', savedTheme);
+    })();
+  </script>
 </head>
 
 <body>
 
-  <!-- Ambient Aurora Orbs (Gen-Z Aesthetic Lighting) -->
-  <div class="ambient-glow glow-1"></div>
-  <div class="ambient-glow glow-2"></div>
-  <div class="ambient-glow glow-3"></div>
 
-  <div class="app-container">
-    <!-- Header -->
-    <header class="app-header">
-      <div class="status-pill">
-        <span class="status-dot"></span>
-        <span class="status-text">Clinical Biomarker Engine </span>
+  <!-- Navigation Bar -->
+  <header class="site-header" id="site-header">
+    <div class="container nav-container">
+      <a href="#home" class="brand-logo" aria-label="DiaRisk AI Home">
+        <div class="logo-icon-box">
+          <svg class="logo-svg" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="32" height="32" rx="8" fill="url(#logo-grad)" />
+            <path d="M16 7V25M7 16H25" stroke="#FFFFFF" stroke-width="3.2" stroke-linecap="round" />
+            <circle cx="16" cy="16" r="3.5" fill="#FFFFFF" />
+            <defs>
+              <linearGradient id="logo-grad" x1="0" y1="0" x2="32" y2="32" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#0D9488" />
+                <stop offset="1" stop-color="#0284C7" />
+              </linearGradient>
+            </defs>
+          </svg>
+        </div>
+        <div class="brand-text-group">
+          <span class="brand-name">DiaRisk <span class="brand-ai">AI</span></span>
+          <span class="brand-subtext">Clinical Biomarker Screening</span>
+        </div>
+      </a>
+
+      <nav class="nav-links" id="nav-links" aria-label="Main Navigation">
+        <a href="#home" class="nav-link active" id="nav-home">Home</a>
+        <a href="#how-it-works" class="nav-link" id="nav-how-it-works">How It Works</a>
+        <a href="#about" class="nav-link" id="nav-about">About</a>
+        <a href="#assessment-section" class="nav-link" id="nav-assessment">Assessment</a>
+        <a href="#faq" class="nav-link" id="nav-faq">Help & FAQ</a>
+      </nav>
+
+      <div class="nav-actions">
+        <!-- Theme Toggle Button -->
+        <button type="button" class="theme-toggle-btn" id="theme-toggle" aria-label="Toggle Dark and Light Mode" title="Toggle Theme">
+          <span class="theme-icon sun-icon" aria-hidden="true">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="5"></circle>
+              <line x1="12" y1="1" x2="12" y2="3"></line>
+              <line x1="12" y1="21" x2="12" y2="23"></line>
+              <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+              <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+              <line x1="1" y1="12" x2="3" y2="12"></line>
+              <line x1="21" y1="12" x2="23" y2="12"></line>
+              <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+              <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+            </svg>
+          </span>
+          <span class="theme-icon moon-icon" aria-hidden="true">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+            </svg>
+          </span>
+          <span class="theme-label" id="theme-label">Theme</span>
+        </button>
+
+        <a href="#assessment-section" class="btn btn-primary btn-sm btn-nav-cta" id="btn-nav-assessment">
+          Start Assessment
+        </a>
+
+        <!-- Mobile Menu Toggle -->
+        <button type="button" class="mobile-toggle-btn" id="mobile-toggle" aria-label="Open Navigation Menu">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </button>
       </div>
+    </div>
+  </header>
 
-      <div class="logo-wrapper">
-        <div class="logo-container">
-          <span class="logo-icon">🧬</span>
-          <div class="logo-ring"></div>
+  <main>
+    <!-- ═══════════════════════════════════════════════════════════════
+         1. WELCOME HERO SECTION
+         ═══════════════════════════════════════════════════════════════ -->
+    <section class="hero-section" id="home">
+      <div class="container hero-container">
+        <div class="hero-content">
+          <div class="hero-badge">
+            <span class="pulse-dot"></span>
+            <span>AI-Powered Clinical Screening & Risk Stratification</span>
+          </div>
+
+          <h1 class="hero-title">
+            Understand Your Diabetes Risk. <br>
+            <span class="gradient-text">Take a Step Towards Better Health.</span>
+          </h1>
+
+          <p class="hero-description">
+            DiaRisk AI analyzes 19 physiological, clinical, and lifestyle biomarkers using a calibrated machine learning ensemble.
+            Screen for Type 2 Diabetes Mellitus risk early, understand key metabolic drivers, and take action with evidence-based guidance.
+          </p>
+
+          <div class="hero-cta-group">
+            <a href="#assessment-section" class="btn btn-primary btn-lg" id="btn-hero-get-started">
+              <span>Get Started with Assessment</span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </a>
+            <a href="#how-it-works" class="btn btn-secondary btn-lg" id="btn-hero-learn-more">
+              Learn How It Works
+            </a>
+          </div>
+
+          <div class="hero-trust-grid">
+            <div class="trust-item">
+              <span class="trust-val">19</span>
+              <span class="trust-lbl">Biomarkers Evaluated</span>
+            </div>
+            <div class="trust-item">
+              <span class="trust-val">99.8%</span>
+              <span class="trust-lbl">Model Test Accuracy</span>
+            </div>
+            <div class="trust-item">
+              <span class="trust-val">XAI</span>
+              <span class="trust-lbl">Biomarker Attribution</span>
+            </div>
+            <div class="trust-item">
+              <span class="trust-val">Instant</span>
+              <span class="trust-lbl">Preventive Guidance</span>
+            </div>
+          </div>
         </div>
-      </div>
 
-      <h1 class="app-title">DiaRisk <span class="gradient-ai">AI</span></h1>
-      <p class="app-subtitle">Precision predictive intelligence & biomarker risk stratification for Type 2 Diabetes
-        Mellitus</p>
-
-      <div class="trust-tags">
-        <span class="trust-tag"><span class="tag-icon">⚡</span> 19 Biomarkers</span>
-        <span class="trust-tag"><span class="tag-icon">🎯</span> Soft Voting Ensemble</span>
-        <span class="trust-tag"><span class="tag-icon">🔬</span> XAI Attribution</span>
-        <span class="trust-tag"><span class="tag-icon">🩺</span> Clinical Guidance</span>
-      </div>
-    </header>
-
-    <!-- Stepper Progress Bar -->
-    <nav class="progress-container" aria-label="Assessment Progress">
-      <div class="progress-steps">
-        <div class="progress-step active" data-step="1">
-          <div class="step-circle">
-            <span class="step-num">1</span>
-            <span class="step-icon">✓</span>
-          </div>
-          <span class="step-label">Personal</span>
-        </div>
-        <div class="step-connector" id="connector-1"></div>
-
-        <div class="progress-step" data-step="2">
-          <div class="step-circle">
-            <span class="step-num">2</span>
-            <span class="step-icon">✓</span>
-          </div>
-          <span class="step-label">Biometrics</span>
-        </div>
-        <div class="step-connector" id="connector-2"></div>
-
-        <div class="progress-step" data-step="3">
-          <div class="step-circle">
-            <span class="step-num">3</span>
-            <span class="step-icon">✓</span>
-          </div>
-          <span class="step-label">Clinical Data</span>
-        </div>
-        <div class="step-connector" id="connector-3"></div>
-
-        <div class="progress-step" data-step="4">
-          <div class="step-circle">
-            <span class="step-num">4</span>
-            <span class="step-icon">✓</span>
-          </div>
-          <span class="step-label">Lifestyle</span>
-        </div>
-        <div class="step-connector" id="connector-4"></div>
-
-        <div class="progress-step" data-step="5">
-          <div class="step-circle">
-            <span class="step-num">5</span>
-            <span class="step-icon">✓</span>
-          </div>
-          <span class="step-label">Report</span>
-        </div>
-      </div>
-    </nav>
-
-    <!-- Main Wizard Form -->
-    <main>
-      <form id="diabetes-form" novalidate>
-
-        <!-- STEP 1: Personal Profile -->
-        <section class="form-step active" id="step-1" aria-labelledby="step-1-title">
-          <div class="glass-card">
-            <h2 class="step-title" id="step-1-title">Personal Profile</h2>
-            <p class="step-description">Enter demographic information to establish baseline physiological reference
-              ranges.</p>
-
-            <div class="form-group">
-              <label for="input-name">Full Name <span class="required">*</span></label>
-              <input type="text" id="input-name" class="form-input" placeholder="e.g., Alex Johnson" required
-                autocomplete="name">
-              <span class="input-hint">Used to personalize your clinical assessment report</span>
-            </div>
-
-            <div class="form-group">
-              <label for="input-age">Age: <span id="age-display" class="slider-unit">35 years</span> <span
-                  class="required">*</span></label>
-              <div class="slider-container">
-                <input type="range" id="input-age" min="18" max="90" value="35">
-                <div class="slider-labels">
-                  <span>18 yrs</span>
-                  <span>45 yrs</span>
-                  <span>65 yrs</span>
-                  <span>90 yrs</span>
-                </div>
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label>Biological Sex <span class="required">*</span></label>
-              <div class="toggle-group" role="radiogroup" aria-label="Biological Sex">
-                <label class="toggle-card selected">
-                  <input type="radio" name="gender" value="Male" checked>
-                  <div class="toggle-icon">👨</div>
-                  <div class="toggle-label">Male</div>
-                </label>
-                <label class="toggle-card">
-                  <input type="radio" name="gender" value="Female">
-                  <div class="toggle-icon">👩</div>
-                  <div class="toggle-label">Female</div>
-                </label>
-                <label class="toggle-card">
-                  <input type="radio" name="gender" value="Other">
-                  <div class="toggle-icon">🧑</div>
-                  <div class="toggle-label">Other</div>
-                </label>
-              </div>
-            </div>
-
-            <!-- Conditional Pregnancies Field (displayed when Female is selected) -->
-            <div class="form-group conditional-field" id="pregnancies-group" style="display: none;">
-              <label for="input-pregnancies">Number of Pregnancies: <span id="pregnancies-display"
-                  class="slider-unit">0</span></label>
-              <div class="slider-container">
-                <input type="range" id="input-pregnancies" min="0" max="15" value="0">
-                <div class="slider-labels">
-                  <span>0</span>
-                  <span>2</span>
-                  <span>4</span>
-                  <span>6+</span>
-                </div>
-              </div>
-              <span class="input-hint">Multiparity and gestational history are clinically correlated with metabolic and
-                T2DM risk</span>
-            </div>
-
-            <div class="nav-buttons">
-              <div></div>
-              <button type="button" class="btn btn-primary" id="btn-step1-next">
-                Next: Biometrics <span>→</span>
-              </button>
-            </div>
-          </div>
-        </section>
-
-        <!-- STEP 2: Body Metrics & Composition -->
-        <section class="form-step" id="step-2" aria-labelledby="step-2-title">
-          <div class="glass-card">
-            <h2 class="step-title" id="step-2-title">Body Metrics & Composition</h2>
-            <p class="step-description">Adiposity distribution and body mass indices correlate directly with insulin
-              sensitivity.</p>
-
-            <div class="form-row">
-              <div class="form-group">
-                <label for="input-height">Height (cm) <span class="required">*</span></label>
-                <input type="number" id="input-height" class="form-input" min="100" max="240" value="170"
-                  placeholder="e.g. 170" required>
-              </div>
-              <div class="form-group">
-                <label for="input-weight">Weight (kg) <span class="required">*</span></label>
-                <input type="number" id="input-weight" class="form-input" min="30" max="220" step="0.5" value="70"
-                  placeholder="e.g. 70" required>
-              </div>
-            </div>
-
-            <!-- Real-time BMI Display -->
-            <div class="bmi-display" id="bmi-box" aria-live="polite">
-              <div class="model-info-label">Calculated Body Mass Index (BMI)</div>
-              <div class="bmi-value bmi-normal" id="bmi-value-display">24.2 kg/m²</div>
-              <div class="bmi-category bmi-normal" id="bmi-category-display">Normal Weight</div>
-              <div class="bmi-spectrum" aria-hidden="true">
-                <div class="bmi-spectrum-bar">
-                  <span class="bmi-seg seg-under" title="Underweight (&lt;18.5)"></span>
-                  <span class="bmi-seg seg-normal" title="Normal (18.5–24.9)"></span>
-                  <span class="bmi-seg seg-over" title="Overweight (25.0–29.9)"></span>
-                  <span class="bmi-seg seg-obese" title="Obese (≥30.0)"></span>
-                </div>
-                <div class="bmi-spectrum-labels">
-                  <span>&lt;18.5</span>
-                  <span>18.5–24.9</span>
-                  <span>25–29.9</span>
-                  <span>≥30</span>
-                </div>
-              </div>
-              <input type="hidden" id="input-bmi" value="24.2">
-            </div>
-
-            <div class="form-group mt-4">
-              <label for="input-waist">Waist Circumference (cm) <span class="required">*</span></label>
-              <input type="number" id="input-waist" class="form-input" min="50" max="160" value="84"
-                placeholder="e.g. 84" required>
-              <span class="input-hint">Measured horizontally at the level of the navel (critical visceral adiposity
-                indicator)</span>
-            </div>
-
-            <div class="nav-buttons">
-              <button type="button" class="btn btn-secondary" id="btn-step2-prev">
-                <span>←</span> Back
-              </button>
-              <button type="button" class="btn btn-primary" id="btn-step2-next">
-                Next: Clinical Data <span>→</span>
-              </button>
-            </div>
-          </div>
-        </section>
-
-        <!-- STEP 3: Clinical & Medical History -->
-        <section class="form-step" id="step-3" aria-labelledby="step-3-title">
-          <div class="glass-card">
-            <h2 class="step-title" id="step-3-title">Clinical & Laboratory Biomarkers</h2>
-            <p class="step-description">Blood glucose homeostasis parameters, hemodynamic markers, and familial history.
-            </p>
-
-            <div class="form-row">
-              <div class="form-group">
-                <label for="input-glucose">Fasting Blood Glucose (mg/dL) <span class="required">*</span></label>
-                <input type="number" id="input-glucose" class="form-input" min="60" max="400" value="95" required>
-                <span class="input-hint">Normal: &lt;100 | Pre-diabetes: 100–125 | Diabetes: ≥126</span>
-              </div>
-              <div class="form-group">
-                <label for="input-hba1c">Glycated Hemoglobin (HbA1c %) <span class="required">*</span></label>
-                <input type="number" id="input-hba1c" class="form-input" min="3.5" max="18.0" step="0.1" value="5.3"
-                  required>
-                <span class="input-hint">Normal: &lt;5.7% | Pre-diabetes: 5.7–6.4% | Diabetes: ≥6.5%</span>
-              </div>
-            </div>
-
-            <div class="form-row">
-              <div class="form-group">
-                <label for="input-bp-systolic">Systolic Blood Pressure (mmHg) <span class="required">*</span></label>
-                <input type="number" id="input-bp-systolic" class="form-input" min="70" max="230" value="120" required>
-                <span class="input-hint">Normal: &lt;120 mmHg</span>
-              </div>
-              <div class="form-group">
-                <label for="input-bp-diastolic">Diastolic Blood Pressure (mmHg) <span class="required">*</span></label>
-                <input type="number" id="input-bp-diastolic" class="form-input" min="40" max="140" value="80" required>
-                <span class="input-hint">Normal: &lt;80 mmHg</span>
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label for="input-cholesterol">Total Cholesterol (mg/dL) <span class="required">*</span></label>
-              <input type="number" id="input-cholesterol" class="form-input" min="90" max="450" value="185" required>
-              <span class="input-hint">Desirable: &lt;200 | Borderline: 200–239 | High: ≥240</span>
-            </div>
-
-            <!-- Family History with Yes/No Toggles -->
-            <div class="form-group">
-              <label>Family History of Diabetes (Parent or Sibling) <span class="required">*</span></label>
-              <div class="toggle-group" role="radiogroup" aria-label="Family History of Diabetes">
-                <label class="toggle-card">
-                  <input type="radio" name="family_history" value="Yes">
-                  <div class="toggle-icon">🧬</div>
-                  <div class="toggle-label">Yes (First-degree relative)</div>
-                </label>
-                <label class="toggle-card selected">
-                  <input type="radio" name="family_history" value="No" checked>
-                  <div class="toggle-icon">🛡️</div>
-                  <div class="toggle-label">No Family History</div>
-                </label>
-              </div>
-              <span class="input-hint">First-degree genetic history confers a 2- to 6-fold increase in lifetime
-                predisposition</span>
-            </div>
-
-            <!-- Comorbidities Toggles -->
-            <div class="form-row">
-              <div class="form-group">
-                <label>Diagnosed Hypertension</label>
-                <div class="toggle-group" role="radiogroup">
-                  <label class="toggle-card">
-                    <input type="radio" name="hypertension" value="1">
-                    <div class="toggle-label">Yes</div>
-                  </label>
-                  <label class="toggle-card selected">
-                    <input type="radio" name="hypertension" value="0" checked>
-                    <div class="toggle-label">No</div>
-                  </label>
-                </div>
-              </div>
-
-              <div class="form-group">
-                <label>History of Heart Disease</label>
-                <div class="toggle-group" role="radiogroup">
-                  <label class="toggle-card">
-                    <input type="radio" name="heart_disease" value="1">
-                    <div class="toggle-label">Yes</div>
-                  </label>
-                  <label class="toggle-card selected">
-                    <input type="radio" name="heart_disease" value="0" checked>
-                    <div class="toggle-label">No</div>
-                  </label>
-                </div>
-              </div>
-            </div>
-
-            <div class="nav-buttons">
-              <button type="button" class="btn btn-secondary" id="btn-step3-prev">
-                <span>←</span> Back
-              </button>
-              <button type="button" class="btn btn-primary" id="btn-step3-next">
-                Next: Lifestyle <span>→</span>
-              </button>
-            </div>
-          </div>
-        </section>
-
-        <!-- STEP 4: Lifestyle & Metabolic Habits -->
-        <section class="form-step" id="step-4" aria-labelledby="step-4-title">
-          <div class="glass-card">
-            <h2 class="step-title" id="step-4-title">Lifestyle & Environmental Factors</h2>
-            <p class="step-description">Modifiable behavioral elements that profoundly regulate metabolic pathways.</p>
-
-            <div class="form-row">
-              <div class="form-group">
-                <label for="input-physical-activity">Physical Activity Level <span class="required">*</span></label>
-                <select id="input-physical-activity" class="form-select">
-                  <option value="Sedentary">Sedentary (&lt;30 mins light movement/day)</option>
-                  <option value="Light">Light (Walking, gentle chores 1-2x/week)</option>
-                  <option value="Moderate" selected>Moderate (Brisk walk / workout 3-4x/week)</option>
-                  <option value="Active">Active (Intense exercise / athlete 5+x/week)</option>
-                </select>
-              </div>
-
-              <div class="form-group">
-                <label for="input-diet-quality">Dietary Quality Pattern <span class="required">*</span></label>
-                <select id="input-diet-quality" class="form-select">
-                  <option value="Poor">Poor (High refined sugars, processed foods)</option>
-                  <option value="Average">Average (Mixed diet, occasional junk food)</option>
-                  <option value="Good" selected>Good (Balanced, regular vegetables & fiber)</option>
-                  <option value="Excellent">Excellent (Whole-food Mediterranean/DASH)</option>
-                </select>
-              </div>
-            </div>
-
-            <div class="form-row">
-              <div class="form-group">
-                <label for="input-smoking">Smoking History <span class="required">*</span></label>
-                <select id="input-smoking" class="form-select">
-                  <option value="never" selected>Never Smoked</option>
-                  <option value="former">Former Smoker (Quit)</option>
-                  <option value="not current">Not Currently Smoking</option>
-                  <option value="current">Current Regular Smoker</option>
-                  <option value="ever">Ever Smoked</option>
-                </select>
-              </div>
-
-              <div class="form-group">
-                <label for="input-alcohol">Alcohol Consumption <span class="required">*</span></label>
-                <select id="input-alcohol" class="form-select">
-                  <option value="None" selected>None (Teetotaler)</option>
-                  <option value="Occasional">Occasional (1-2 drinks/month)</option>
-                  <option value="Moderate">Moderate (1-2 drinks/week)</option>
-                  <option value="Heavy">Heavy (Daily or binge drinking)</option>
-                </select>
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label for="input-stress">Chronic Stress Level: <span id="stress-display" class="slider-unit">4 / 10
-                  (Moderate)</span> <span class="required">*</span></label>
-              <div class="slider-container">
-                <input type="range" id="input-stress" min="1" max="10" value="4">
-                <div class="slider-labels">
-                  <span>1 (Minimal)</span>
-                  <span>5 (Moderate)</span>
-                  <span>10 (Severe)</span>
-                </div>
-              </div>
-              <span class="input-hint">Prolonged cortisol elevation drives central adiposity and hepatic
-                gluconeogenesis</span>
-            </div>
-
-            <div class="form-group">
-              <label for="input-sleep">Average Daily Sleep: <span id="sleep-display" class="slider-unit">7.5
-                  hours</span> <span class="required">*</span></label>
-              <div class="slider-container">
-                <input type="range" id="input-sleep" min="3.0" max="12.0" step="0.5" value="7.5">
-                <div class="slider-labels">
-                  <span>3 hrs</span>
-                  <span>7-8 hrs (Ideal)</span>
-                  <span>12 hrs</span>
-                </div>
-              </div>
-              <span class="input-hint">&lt;6 hours/night reduces whole-body insulin sensitivity by up to 25%</span>
-            </div>
-
-            <div class="nav-buttons">
-              <button type="button" class="btn btn-secondary" id="btn-step4-prev">
-                <span>←</span> Back
-              </button>
-              <button type="button" class="btn btn-predict" id="btn-submit-predict">
-                <span>⚡ Run AI Risk Stratification</span>
-              </button>
-            </div>
-          </div>
-        </section>
-
-        <!-- STEP 5: Intelligent Clinical Assessment Report -->
-        <section class="form-step" id="step-5" aria-labelledby="step-5-title">
-          <div class="results-container">
-
-            <!-- Gauge & Classification Header -->
-            <div class="glass-card gauge-section">
-              <div class="gauge-wrapper">
-                <svg class="gauge-svg" viewBox="0 0 200 200">
-                  <circle class="gauge-bg" cx="100" cy="100" r="90" />
-                  <circle class="gauge-fill" id="gauge-circle" cx="100" cy="100" r="90" />
+        <!-- Hero Visual: Clean LiveDoc-style Healthcare Card Preview -->
+        <div class="hero-visual" aria-hidden="true">
+          <div class="hero-card-preview">
+            <div class="card-preview-header">
+              <div class="preview-avatar">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                  <circle cx="12" cy="7" r="4"></circle>
                 </svg>
-                <div class="gauge-center">
-                  <div class="gauge-percentage" id="result-percentage">0<span class="gauge-percentage-symbol">%</span>
-                  </div>
-                  <div class="gauge-label">Estimated Diabetes Risk</div>
-                </div>
               </div>
-
-              <div>
-                <div class="risk-badge low" id="result-badge">
-                  <span>●</span> <span id="result-level-text">Low Risk</span>
-                </div>
+              <div class="preview-patient-info">
+                <div class="preview-patient-name">Patient Health Assessment</div>
+                <div class="preview-status-tag">Multi-Biomarker Analysis</div>
               </div>
             </div>
 
-            <!-- Model Transparency Banner -->
-            <div class="model-banner" id="model-banner">
-              <div class="model-info-item">
-                <div class="model-info-label">Active Classifier</div>
-                <div class="model-info-value" id="meta-model-name">Random Forest Ensemble</div>
+            <div class="preview-metrics-grid">
+              <div class="preview-metric">
+                <span class="metric-label">Fasting Glucose</span>
+                <span class="metric-value">95 <small>mg/dL</small></span>
+                <span class="metric-status status-good">Optimal</span>
               </div>
-              <div class="model-info-item">
-                <div class="model-info-label">Test Set Accuracy</div>
-                <div class="model-info-value" id="meta-accuracy">96.8%</div>
+              <div class="preview-metric">
+                <span class="metric-label">HbA1c Level</span>
+                <span class="metric-value">5.3 <small>%</small></span>
+                <span class="metric-status status-good">Normal</span>
               </div>
-              <div class="model-info-item">
-                <div class="model-info-label">ROC-AUC Discrimination</div>
-                <div class="model-info-value" id="meta-roc">0.978</div>
+              <div class="preview-metric">
+                <span class="metric-label">Body Mass Index</span>
+                <span class="metric-value">24.2 <small>kg/m²</small></span>
+                <span class="metric-status status-good">Healthy</span>
               </div>
-              <div class="model-info-item">
-                <div class="model-info-label">Dataset Cohort</div>
-                <div class="model-info-value">100,000 Records</div>
-              </div>
-            </div>
-
-            <!-- Professional Clinical Statement -->
-            <div class="statement-card">
-              <div class="statement-header">
-                <div class="statement-icon">📋</div>
-                <h3 class="statement-title" id="step-5-title">Comprehensive Clinical Assessment</h3>
-              </div>
-              <p class="statement-body" id="result-statement">
-                Loading clinical evaluation...
-              </p>
-            </div>
-
-            <!-- Ranked Risk Factor Breakdown -->
-            <div class="glass-card mb-4">
-              <h3 class="section-title">
-                <span class="section-icon">🔍</span>
-                Biomarker & Risk Factor Breakdown
-              </h3>
-              <p class="step-description">Individual analysis of each physiological marker ranked by predictive
-                importance.</p>
-
-              <div class="risk-factors-grid" id="risk-factors-container">
-                <!-- Injected via JavaScript -->
+              <div class="preview-metric">
+                <span class="metric-label">Blood Pressure</span>
+                <span class="metric-value">120/80 <small>mmHg</small></span>
+                <span class="metric-status status-good">Optimal</span>
               </div>
             </div>
 
-            <!-- Actionable Personalized Precautions -->
-            <div class="glass-card mb-4 precautions-section">
-              <h3 class="section-title">
-                <span class="section-icon">🩺</span>
-                Evidence-Based Preventive Roadmap
-              </h3>
-              <p class="step-description">Tailored interventions structured across immediate, lifestyle, and medical
-                domains.</p>
-
-              <!-- Immediate Actions -->
-              <div class="precaution-category cat-immediate" id="prec-cat-immediate">
-                <h4 class="precaution-category-title">
-                  <span class="cat-icon">⚡</span> Immediate Action Items
-                </h4>
-                <ul class="precaution-list" id="list-immediate-actions"></ul>
+            <div class="preview-risk-indicator">
+              <div class="preview-gauge-mini">
+                <div class="mini-score">8.5%</div>
+                <div class="mini-tier">Low Risk Tier</div>
               </div>
-
-              <!-- Lifestyle & Dietary Modifications -->
-              <div class="precaution-category cat-lifestyle" id="prec-cat-lifestyle">
-                <h4 class="precaution-category-title">
-                  <span class="cat-icon">🥗</span> Lifestyle & Metabolic Modifications
-                </h4>
-                <ul class="precaution-list" id="list-lifestyle-changes"></ul>
-              </div>
-
-              <!-- Clinical & Diagnostic Follow-ups -->
-              <div class="precaution-category cat-medical" id="prec-cat-medical">
-                <h4 class="precaution-category-title">
-                  <span class="cat-icon">🏥</span> Clinical Consultation & Surveillance
-                </h4>
-                <ul class="precaution-list" id="list-medical-followups"></ul>
+              <div class="preview-recommendation">
+                <strong>Preventive Summary:</strong> Biomarkers are within healthy ranges. Annual metabolic surveillance recommended.
               </div>
             </div>
 
-            <!-- Results Action Buttons -->
-            <div class="results-actions">
-              <button type="button" class="btn btn-download" id="btn-download-report">
-                <span>📥</span> Save / Print Clinical Report
-              </button>
-              <button type="button" class="btn btn-primary btn-restart" id="btn-restart-assessment">
-                <span>🔄</span> Start New Patient Assessment
-              </button>
+            <div class="preview-floating-pill">
+              <span class="floating-icon">🛡️</span>
+              <span>100% Client-Side Privacy</span>
             </div>
-
-            <!-- Disclaimer -->
-            <div class="disclaimer">
-              <strong>Medical Disclaimer:</strong> This machine learning assessment is intended for academic
-              demonstration and clinical decision-support screening purposes only. It is not an automated diagnostic
-              system. Confirmatory testing (such as laboratory Oral Glucose Tolerance Test or repeat fasting plasma
-              glucose) must be performed under the direction of a licensed healthcare provider.
-            </div>
-
           </div>
-        </section>
+        </div>
+      </div>
+    </section>
 
-      </form>
-    </main>
-  </div>
+    <!-- ═══════════════════════════════════════════════════════════════
+         2. HOW IT WORKS SECTION (Simple 3 Steps)
+         ═══════════════════════════════════════════════════════════════ -->
+    <section class="section section-alt" id="how-it-works">
+      <div class="container">
+        <div class="section-header text-center">
+          <span class="section-tag">Methodology</span>
+          <h2 class="section-title">How DiaRisk AI Works</h2>
+          <p class="section-subtitle">
+            Three simple steps to evaluate your metabolic profile and receive clinical-grade decision support.
+          </p>
+        </div>
 
-  <!-- Loading Overlay -->
+        <div class="steps-grid">
+          <!-- Step 1 Card -->
+          <div class="step-card">
+            <div class="step-card-num">01</div>
+            <div class="step-card-icon">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                <polyline points="14 2 14 8 20 8"></polyline>
+                <line x1="16" y1="13" x2="8" y2="13"></line>
+                <line x1="16" y1="17" x2="8" y2="17"></line>
+                <polyline points="10 9 9 9 8 9"></polyline>
+              </svg>
+            </div>
+            <h3 class="step-card-title">Enter Health Details</h3>
+            <p class="step-card-desc">
+              Input routine biometrics and laboratory markers across 4 organized sections: demographics, body metrics, clinical tests, and daily lifestyle habits.
+            </p>
+          </div>
+
+          <!-- Step 2 Card -->
+          <div class="step-card">
+            <div class="step-card-num">02</div>
+            <div class="step-card-icon">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="3"></circle>
+                <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+              </svg>
+            </div>
+            <h3 class="step-card-title">Analyse Risk</h3>
+            <p class="step-card-desc">
+              Our Soft Voting Ensemble model weighs non-linear biomarker interactions against 100,000 clinical records, calibrating risk into Low, Moderate, or High tiers.
+            </p>
+          </div>
+
+          <!-- Step 3 Card -->
+          <div class="step-card">
+            <div class="step-card-num">03</div>
+            <div class="step-card-icon">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                <polyline points="22 4 12 14.01 9 11.01"></polyline>
+              </svg>
+            </div>
+            <h3 class="step-card-title">View Results</h3>
+            <p class="step-card-desc">
+              Review your comprehensive clinical assessment report with ranked biomarker attribution, clinical explanation, and categorized preventive recommendations.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════════════
+         3. CLINICAL CONTEXT & WHY EARLY DETECTION MATTERS
+         ═══════════════════════════════════════════════════════════════ -->
+    <section class="section">
+      <div class="container">
+        <div class="clinical-feature-box">
+          <div class="clinical-feature-text">
+            <span class="section-tag">Clinical Importance</span>
+            <h2 class="section-title">Why Early Detection of Type 2 Diabetes Matters</h2>
+            <p>
+              Type 2 Diabetes Mellitus frequently develops silently over 5 to 10 years before classic symptoms appear. During this pre-diabetic window, elevated insulin resistance and subtle beta-cell stress begin damaging blood vessels.
+            </p>
+            <p>
+              Clinical studies demonstrate that <strong>structured lifestyle and nutritional interventions can reduce progression to diabetes by up to 58%</strong>. DiaRisk AI provides early visibility so you can collaborate with your doctor before irreversible metabolic complications arise.
+            </p>
+            <div class="key-points-list">
+              <div class="key-point">
+                <span class="kp-icon">✓</span>
+                <span>Identifies subclinical risk before fasting hyperglycemia is pronounced.</span>
+              </div>
+              <div class="key-point">
+                <span class="kp-icon">✓</span>
+                <span>Explains specific biomarker contributions (HbA1c, glucose, visceral fat).</span>
+              </div>
+              <div class="key-point">
+                <span class="kp-icon">✓</span>
+                <span>Empowers timely physician consultation and targeted lifestyle modification.</span>
+              </div>
+            </div>
+          </div>
+          <div class="clinical-feature-stats">
+            <div class="stat-card">
+              <div class="stat-number">58%</div>
+              <div class="stat-desc">Risk reduction through early lifestyle interventions in pre-diabetes</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-number">1 in 3</div>
+              <div class="stat-desc">Adults estimated to have pre-diabetes, over 80% unaware</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-number">90 Days</div>
+              <div class="stat-desc">Glycemic memory tracked by HbA1c glycated hemoglobin</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════════════
+         4. ASSESSMENT SECTION (Existing Multi-Step Form)
+         ═══════════════════════════════════════════════════════════════ -->
+    <section class="section section-assessment" id="assessment-section">
+      <div class="container">
+        <div class="assessment-header text-center">
+          <span class="section-tag">Interactive Screener</span>
+          <h2 class="section-title">Diabetes Risk Assessment Dashboard</h2>
+          <p class="section-subtitle">
+            Complete the 4 health sections below. All 19 parameters are evaluated by the machine learning pipeline to determine your risk stratification.
+          </p>
+        </div>
+
+        <!-- Stepper Progress Bar (Preserved IDs & structure) -->
+        <nav class="progress-container" aria-label="Assessment Progress">
+          <div class="progress-steps">
+            <div class="progress-step active" data-step="1">
+              <div class="step-circle">
+                <span class="step-num">1</span>
+                <span class="step-icon">✓</span>
+              </div>
+              <span class="step-label">Personal</span>
+            </div>
+            <div class="step-connector" id="connector-1"></div>
+
+            <div class="progress-step" data-step="2">
+              <div class="step-circle">
+                <span class="step-num">2</span>
+                <span class="step-icon">✓</span>
+              </div>
+              <span class="step-label">Biometrics</span>
+            </div>
+            <div class="step-connector" id="connector-2"></div>
+
+            <div class="progress-step" data-step="3">
+              <div class="step-circle">
+                <span class="step-num">3</span>
+                <span class="step-icon">✓</span>
+              </div>
+              <span class="step-label">Clinical Data</span>
+            </div>
+            <div class="step-connector" id="connector-3"></div>
+
+            <div class="progress-step" data-step="4">
+              <div class="step-circle">
+                <span class="step-num">4</span>
+                <span class="step-icon">✓</span>
+              </div>
+              <span class="step-label">Lifestyle</span>
+            </div>
+            <div class="step-connector" id="connector-4"></div>
+
+            <div class="progress-step" data-step="5">
+              <div class="step-circle">
+                <span class="step-num">5</span>
+                <span class="step-icon">✓</span>
+              </div>
+              <span class="step-label">Report</span>
+            </div>
+          </div>
+        </nav>
+
+        <!-- Main Wizard Form -->
+        <div class="assessment-card-wrapper">
+          <form id="diabetes-form" novalidate>
+
+            <!-- STEP 1: Personal Profile -->
+            <section class="form-step active" id="step-1" aria-labelledby="step-1-title">
+              <div class="assessment-card">
+                <div class="card-step-header">
+                  <div class="step-badge">Step 1 of 4</div>
+                  <h3 class="step-title" id="step-1-title">Personal Profile</h3>
+                  <p class="step-description">Enter demographic information to establish baseline physiological reference ranges.</p>
+                </div>
+
+                <div class="form-group">
+                  <label for="input-name" class="form-label">Full Name <span class="required">*</span></label>
+                  <input type="text" id="input-name" class="form-input" placeholder="e.g., Alex Johnson" required autocomplete="name">
+                  <span class="input-hint">Used to personalize your clinical assessment report</span>
+                </div>
+
+                <div class="form-group">
+                  <div class="slider-header">
+                    <label for="input-age" class="form-label">Age <span class="required">*</span></label>
+                    <span id="age-display" class="slider-badge">35 years</span>
+                  </div>
+                  <div class="slider-container">
+                    <input type="range" id="input-age" min="18" max="90" value="35" class="custom-slider">
+                    <div class="slider-labels">
+                      <span>18 yrs</span>
+                      <span>45 yrs</span>
+                      <span>65 yrs</span>
+                      <span>90 yrs</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label">Biological Sex <span class="required">*</span></label>
+                  <div class="toggle-group" role="radiogroup" aria-label="Biological Sex">
+                    <label class="toggle-card selected">
+                      <input type="radio" name="gender" value="Male" checked>
+                      <div class="toggle-icon">👨</div>
+                      <div class="toggle-label">Male</div>
+                    </label>
+                    <label class="toggle-card">
+                      <input type="radio" name="gender" value="Female">
+                      <div class="toggle-icon">👩</div>
+                      <div class="toggle-label">Female</div>
+                    </label>
+                    <label class="toggle-card">
+                      <input type="radio" name="gender" value="Other">
+                      <div class="toggle-icon">🧑</div>
+                      <div class="toggle-label">Other</div>
+                    </label>
+                  </div>
+                </div>
+
+                <!-- Conditional Pregnancies Field (female only) -->
+                <div class="form-group conditional-field" id="pregnancies-group" style="display: none;">
+                  <div class="slider-header">
+                    <label for="input-pregnancies" class="form-label">Number of Pregnancies</label>
+                    <span id="pregnancies-display" class="slider-badge">0</span>
+                  </div>
+                  <div class="slider-container">
+                    <input type="range" id="input-pregnancies" min="0" max="15" value="0" class="custom-slider">
+                    <div class="slider-labels">
+                      <span>0</span>
+                      <span>2</span>
+                      <span>4</span>
+                      <span>6+</span>
+                    </div>
+                  </div>
+                  <span class="input-hint">Multiparity and gestational history correlate with metabolic strain and lifetime risk</span>
+                </div>
+
+                <div class="nav-buttons">
+                  <div></div>
+                  <button type="button" class="btn btn-primary" id="btn-step1-next">
+                    <span>Next: Biometrics</span>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <line x1="5" y1="12" x2="19" y2="12"></line>
+                      <polyline points="12 5 19 12 12 19"></polyline>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+            </section>
+
+            <!-- STEP 2: Body Metrics & Composition -->
+            <section class="form-step" id="step-2" aria-labelledby="step-2-title">
+              <div class="assessment-card">
+                <div class="card-step-header">
+                  <div class="step-badge">Step 2 of 4</div>
+                  <h3 class="step-title" id="step-2-title">Body Metrics & Composition</h3>
+                  <p class="step-description">Adiposity distribution and body mass indices correlate directly with peripheral insulin resistance.</p>
+                </div>
+
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="input-height" class="form-label">Height (cm) <span class="required">*</span></label>
+                    <input type="number" id="input-height" class="form-input" min="100" max="240" value="170" placeholder="e.g. 170" required>
+                  </div>
+                  <div class="form-group">
+                    <label for="input-weight" class="form-label">Weight (kg) <span class="required">*</span></label>
+                    <input type="number" id="input-weight" class="form-input" min="30" max="220" step="0.5" value="70" placeholder="e.g. 70" required>
+                  </div>
+                </div>
+
+                <!-- Real-time BMI Display -->
+                <div class="bmi-display" id="bmi-box" aria-live="polite">
+                  <div class="bmi-header-row">
+                    <span class="bmi-title">Calculated Body Mass Index (BMI)</span>
+                    <span class="bmi-badge-chip" id="bmi-category-display">Normal Weight</span>
+                  </div>
+                  <div class="bmi-value-text" id="bmi-value-display">24.2 kg/m²</div>
+                  <div class="bmi-spectrum" aria-hidden="true">
+                    <div class="bmi-spectrum-bar">
+                      <span class="bmi-seg seg-under" title="Underweight (&lt;18.5)"></span>
+                      <span class="bmi-seg seg-normal" title="Normal (18.5–24.9)"></span>
+                      <span class="bmi-seg seg-over" title="Overweight (25.0–29.9)"></span>
+                      <span class="bmi-seg seg-obese" title="Obese (≥30.0)"></span>
+                    </div>
+                    <div class="bmi-spectrum-labels">
+                      <span>&lt;18.5 Underweight</span>
+                      <span>18.5–24.9 Normal</span>
+                      <span>25–29.9 Overweight</span>
+                      <span>&ge;30 Obese</span>
+                    </div>
+                  </div>
+                  <input type="hidden" id="input-bmi" value="24.2">
+                </div>
+
+                <div class="form-group mt-4">
+                  <label for="input-waist" class="form-label">Waist Circumference (cm) <span class="required">*</span></label>
+                  <input type="number" id="input-waist" class="form-input" min="50" max="160" value="84" placeholder="e.g. 84" required>
+                  <span class="input-hint">Measured horizontally at navel level (key indicator for visceral fat and central adiposity)</span>
+                </div>
+
+                <div class="nav-buttons">
+                  <button type="button" class="btn btn-secondary" id="btn-step2-prev">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <line x1="19" y1="12" x2="5" y2="12"></line>
+                      <polyline points="12 19 5 12 12 5"></polyline>
+                    </svg>
+                    <span>Back</span>
+                  </button>
+                  <button type="button" class="btn btn-primary" id="btn-step2-next">
+                    <span>Next: Clinical Data</span>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <line x1="5" y1="12" x2="19" y2="12"></line>
+                      <polyline points="12 5 19 12 12 19"></polyline>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+            </section>
+
+            <!-- STEP 3: Clinical & Medical History -->
+            <section class="form-step" id="step-3" aria-labelledby="step-3-title">
+              <div class="assessment-card">
+                <div class="card-step-header">
+                  <div class="step-badge">Step 3 of 4</div>
+                  <h3 class="step-title" id="step-3-title">Clinical & Laboratory Biomarkers</h3>
+                  <p class="step-description">Blood glucose homeostasis parameters, hemodynamic markers, and familial predisposition.</p>
+                </div>
+
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="input-glucose" class="form-label">Fasting Blood Glucose (mg/dL) <span class="required">*</span></label>
+                    <input type="number" id="input-glucose" class="form-input" min="60" max="400" value="95" required>
+                    <span class="input-hint">Normal: &lt;100 &bull; Pre-diabetes: 100–125 &bull; Diabetes: &ge;126</span>
+                  </div>
+                  <div class="form-group">
+                    <label for="input-hba1c" class="form-label">Glycated Hemoglobin (HbA1c %) <span class="required">*</span></label>
+                    <input type="number" id="input-hba1c" class="form-input" min="3.5" max="18.0" step="0.1" value="5.3" required>
+                    <span class="input-hint">Normal: &lt;5.7% &bull; Pre-diabetes: 5.7–6.4% &bull; Diabetes: &ge;6.5%</span>
+                  </div>
+                </div>
+
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="input-bp-systolic" class="form-label">Systolic Blood Pressure (mmHg) <span class="required">*</span></label>
+                    <input type="number" id="input-bp-systolic" class="form-input" min="70" max="230" value="120" required>
+                    <span class="input-hint">Desirable: &lt;120 mmHg</span>
+                  </div>
+                  <div class="form-group">
+                    <label for="input-bp-diastolic" class="form-label">Diastolic Blood Pressure (mmHg) <span class="required">*</span></label>
+                    <input type="number" id="input-bp-diastolic" class="form-input" min="40" max="140" value="80" required>
+                    <span class="input-hint">Desirable: &lt;80 mmHg</span>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="input-cholesterol" class="form-label">Total Cholesterol (mg/dL) <span class="required">*</span></label>
+                  <input type="number" id="input-cholesterol" class="form-input" min="90" max="450" value="185" required>
+                  <span class="input-hint">Desirable: &lt;200 &bull; Borderline: 200–239 &bull; High: &ge;240</span>
+                </div>
+
+                <!-- Family History -->
+                <div class="form-group">
+                  <label class="form-label">Family History of Diabetes (Parent or Sibling) <span class="required">*</span></label>
+                  <div class="toggle-group" role="radiogroup" aria-label="Family History of Diabetes">
+                    <label class="toggle-card">
+                      <input type="radio" name="family_history" value="Yes">
+                      <div class="toggle-icon">🧬</div>
+                      <div class="toggle-label">Yes (First-degree relative)</div>
+                    </label>
+                    <label class="toggle-card selected">
+                      <input type="radio" name="family_history" value="No" checked>
+                      <div class="toggle-icon">🛡️</div>
+                      <div class="toggle-label">No Family History</div>
+                    </label>
+                  </div>
+                  <span class="input-hint">First-degree genetic history confers a 2- to 6-fold increase in lifetime risk</span>
+                </div>
+
+                <!-- Comorbidities -->
+                <div class="form-row">
+                  <div class="form-group">
+                    <label class="form-label">Diagnosed Hypertension</label>
+                    <div class="toggle-group" role="radiogroup">
+                      <label class="toggle-card">
+                        <input type="radio" name="hypertension" value="1">
+                        <div class="toggle-label">Yes</div>
+                      </label>
+                      <label class="toggle-card selected">
+                        <input type="radio" name="hypertension" value="0" checked>
+                        <div class="toggle-label">No</div>
+                      </label>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="form-label">History of Heart Disease</label>
+                    <div class="toggle-group" role="radiogroup">
+                      <label class="toggle-card">
+                        <input type="radio" name="heart_disease" value="1">
+                        <div class="toggle-label">Yes</div>
+                      </label>
+                      <label class="toggle-card selected">
+                        <input type="radio" name="heart_disease" value="0" checked>
+                        <div class="toggle-label">No</div>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="nav-buttons">
+                  <button type="button" class="btn btn-secondary" id="btn-step3-prev">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <line x1="19" y1="12" x2="5" y2="12"></line>
+                      <polyline points="12 19 5 12 12 5"></polyline>
+                    </svg>
+                    <span>Back</span>
+                  </button>
+                  <button type="button" class="btn btn-primary" id="btn-step3-next">
+                    <span>Next: Lifestyle</span>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <line x1="5" y1="12" x2="19" y2="12"></line>
+                      <polyline points="12 5 19 12 12 19"></polyline>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+            </section>
+
+            <!-- STEP 4: Lifestyle & Metabolic Habits -->
+            <section class="form-step" id="step-4" aria-labelledby="step-4-title">
+              <div class="assessment-card">
+                <div class="card-step-header">
+                  <div class="step-badge">Step 4 of 4</div>
+                  <h3 class="step-title" id="step-4-title">Lifestyle & Environmental Factors</h3>
+                  <p class="step-description">Modifiable behavioral habits that regulate daily glycemic control and cellular insulin sensitivity.</p>
+                </div>
+
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="input-physical-activity" class="form-label">Physical Activity Level <span class="required">*</span></label>
+                    <select id="input-physical-activity" class="form-select">
+                      <option value="Sedentary">Sedentary (&lt;30 mins light movement/day)</option>
+                      <option value="Light">Light (Walking, gentle chores 1-2x/week)</option>
+                      <option value="Moderate" selected>Moderate (Brisk walk / workout 3-4x/week)</option>
+                      <option value="Active">Active (Intense exercise / athlete 5+x/week)</option>
+                    </select>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="input-diet-quality" class="form-label">Dietary Pattern Quality <span class="required">*</span></label>
+                    <select id="input-diet-quality" class="form-select">
+                      <option value="Poor">Poor (High refined sugars, processed foods)</option>
+                      <option value="Average">Average (Mixed diet, occasional ultra-processed foods)</option>
+                      <option value="Good" selected>Good (Balanced, regular vegetables & fiber)</option>
+                      <option value="Excellent">Excellent (Whole-food Mediterranean/DASH)</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="input-smoking" class="form-label">Smoking History <span class="required">*</span></label>
+                    <select id="input-smoking" class="form-select">
+                      <option value="never" selected>Never Smoked</option>
+                      <option value="former">Former Smoker (Quit)</option>
+                      <option value="not current">Not Currently Smoking</option>
+                      <option value="current">Current Regular Smoker</option>
+                      <option value="ever">Ever Smoked</option>
+                    </select>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="input-alcohol" class="form-label">Alcohol Consumption <span class="required">*</span></label>
+                    <select id="input-alcohol" class="form-select">
+                      <option value="None" selected>None (Non-drinker)</option>
+                      <option value="Occasional">Occasional (1-2 drinks/month)</option>
+                      <option value="Moderate">Moderate (1-2 drinks/week)</option>
+                      <option value="Heavy">Heavy (Frequent or binge drinking)</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <div class="slider-header">
+                    <label for="input-stress" class="form-label">Chronic Stress Level <span class="required">*</span></label>
+                    <span id="stress-display" class="slider-badge">4 / 10 (Moderate)</span>
+                  </div>
+                  <div class="slider-container">
+                    <input type="range" id="input-stress" min="1" max="10" value="4" class="custom-slider">
+                    <div class="slider-labels">
+                      <span>1 (Minimal)</span>
+                      <span>5 (Moderate)</span>
+                      <span>10 (Severe)</span>
+                    </div>
+                  </div>
+                  <span class="input-hint">Elevated cortisol levels promote visceral fat accumulation and hepatic glucose release</span>
+                </div>
+
+                <div class="form-group">
+                  <div class="slider-header">
+                    <label for="input-sleep" class="form-label">Average Daily Sleep <span class="required">*</span></label>
+                    <span id="sleep-display" class="slider-badge">7.5 hours</span>
+                  </div>
+                  <div class="slider-container">
+                    <input type="range" id="input-sleep" min="3.0" max="12.0" step="0.5" value="7.5" class="custom-slider">
+                    <div class="slider-labels">
+                      <span>3 hrs</span>
+                      <span>7-8 hrs (Ideal)</span>
+                      <span>12 hrs</span>
+                    </div>
+                  </div>
+                  <span class="input-hint">Chronically short sleep (&lt;6 hours/night) impairs peripheral glucose tolerance by up to 25%</span>
+                </div>
+
+                <div class="nav-buttons">
+                  <button type="button" class="btn btn-secondary" id="btn-step4-prev">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <line x1="19" y1="12" x2="5" y2="12"></line>
+                      <polyline points="12 19 5 12 12 5"></polyline>
+                    </svg>
+                    <span>Back</span>
+                  </button>
+                  <button type="button" class="btn btn-primary btn-predict" id="btn-submit-predict">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+                    </svg>
+                    <span>Analyse Diabetes Risk</span>
+                  </button>
+                </div>
+              </div>
+            </section>
+
+            <!-- STEP 5: Intelligent Clinical Assessment Report -->
+            <section class="form-step" id="step-5" aria-labelledby="step-5-title">
+              <div class="results-container">
+
+                <!-- Printable Clinical Report Header -->
+                <div class="report-header-banner" id="report-header-banner">
+                  <div class="report-brand-row">
+                    <div class="report-brand">
+                      <span class="report-brand-icon">🧬</span>
+                      <div>
+                        <h2 class="report-brand-title">DiaRisk <span class="brand-ai">AI</span></h2>
+                        <span class="report-brand-sub">Clinical Decision Support &bull; Diabetes Risk Report</span>
+                      </div>
+                    </div>
+                    <div class="report-meta-chip" id="report-meta-chip">
+                      <!-- Patient Info populated dynamically via script.js -->
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Results Hero Card (Gauge & Tier) -->
+                <div class="results-card results-hero-card">
+                  <div class="gauge-section">
+                    <div class="gauge-wrapper">
+                      <svg class="gauge-svg" viewBox="0 0 200 200">
+                        <circle class="gauge-bg" cx="100" cy="100" r="90" />
+                        <circle class="gauge-fill" id="gauge-circle" cx="100" cy="100" r="90" />
+                      </svg>
+                      <div class="gauge-center">
+                        <div class="gauge-percentage" id="result-percentage">0<span class="gauge-percentage-symbol">%</span></div>
+                        <div class="gauge-label">Estimated Risk Score</div>
+                      </div>
+                    </div>
+
+                    <div class="risk-tier-box">
+                      <div class="risk-badge low" id="result-badge">
+                        <span class="badge-dot-indicator">●</span>
+                        <span id="result-level-text">Low Risk</span>
+                      </div>
+                      <p class="risk-badge-caption">Risk Tier based on calibrated soft-voting ensemble probabilities</p>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Professional Clinical Statement -->
+                <div class="results-card statement-card">
+                  <div class="card-section-header">
+                    <div class="header-icon-box">📋</div>
+                    <div>
+                      <h3 class="card-section-title" id="step-5-title">Comprehensive Clinical Assessment</h3>
+                      <p class="card-section-subtitle">Evaluated metabolic profile summary and clinical risk narrative</p>
+                    </div>
+                  </div>
+                  <div class="statement-body-box">
+                    <p class="statement-body" id="result-statement">
+                      Loading clinical evaluation...
+                    </p>
+                  </div>
+                </div>
+
+                <!-- Ranked Risk Factor Breakdown -->
+                <div class="results-card">
+                  <div class="card-section-header">
+                    <div class="header-icon-box">🔍</div>
+                    <div>
+                      <h3 class="card-section-title">Biomarker & Risk Factor Breakdown</h3>
+                      <p class="card-section-subtitle">Individual analysis of each physiological marker ranked by predictive importance</p>
+                    </div>
+                  </div>
+
+                  <div class="risk-factors-grid" id="risk-factors-container">
+                    <!-- Injected dynamically via script.js -->
+                  </div>
+                </div>
+
+                <!-- Actionable Personalized Precautions -->
+                <div class="results-card precautions-section">
+                  <div class="card-section-header">
+                    <div class="header-icon-box">🩺</div>
+                    <div>
+                      <h3 class="card-section-title">Evidence-Based Preventive Roadmap</h3>
+                      <p class="card-section-subtitle">Physician-aligned intervention recommendations across key clinical domains</p>
+                    </div>
+                  </div>
+
+                  <!-- Immediate Actions -->
+                  <div class="precaution-category cat-immediate" id="prec-cat-immediate">
+                    <h4 class="precaution-category-title">
+                      <span class="cat-icon">⚡</span> Immediate Action Items
+                    </h4>
+                    <ul class="precaution-list" id="list-immediate-actions"></ul>
+                  </div>
+
+                  <!-- Lifestyle & Dietary Modifications -->
+                  <div class="precaution-category cat-lifestyle" id="prec-cat-lifestyle">
+                    <h4 class="precaution-category-title">
+                      <span class="cat-icon">🥗</span> Lifestyle & Metabolic Modifications
+                    </h4>
+                    <ul class="precaution-list" id="list-lifestyle-changes"></ul>
+                  </div>
+
+                  <!-- Clinical & Diagnostic Follow-ups -->
+                  <div class="precaution-category cat-medical" id="prec-cat-medical">
+                    <h4 class="precaution-category-title">
+                      <span class="cat-icon">🏥</span> Clinical Consultation & Surveillance
+                    </h4>
+                    <ul class="precaution-list" id="list-medical-followups"></ul>
+                  </div>
+                </div>
+
+                <!-- Results Action Buttons -->
+                <div class="results-actions">
+                  <button type="button" class="btn btn-secondary" id="btn-download-report">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <polyline points="6 9 6 2 18 2 18 9"></polyline>
+                      <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
+                      <rect x="6" y="14" width="12" height="8"></rect>
+                    </svg>
+                    <span>Save / Print Clinical Report</span>
+                  </button>
+
+                  <button type="button" class="btn btn-primary btn-restart" id="btn-restart-assessment">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <polyline points="1 4 1 10 7 10"></polyline>
+                      <polyline points="23 20 23 14 17 14"></polyline>
+                      <path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 0 1 3.51 15"></path>
+                    </svg>
+                    <span>Start New Patient Assessment</span>
+                  </button>
+                </div>
+
+                <!-- Medical Disclaimer -->
+                <div class="disclaimer-card">
+                  <div class="disclaimer-icon">⚠️</div>
+                  <div class="disclaimer-content">
+                    <strong>Medical Disclaimer:</strong>
+                    This machine learning risk assessment is intended strictly for academic demonstration and clinical decision-support screening purposes. It is not an automated diagnostic system and does not replace professional clinical judgement. Confirmatory laboratory testing (such as formal Oral Glucose Tolerance Test or venous HbA1c re-confirmation) must be evaluated under the supervision of a licensed physician.
+                  </div>
+                </div>
+
+              </div>
+            </section>
+
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════════════
+         5. ABOUT THE PROJECT SECTION
+         ═══════════════════════════════════════════════════════════════ -->
+    <section class="section section-alt" id="about">
+      <div class="container">
+        <div class="about-grid">
+          <div class="about-text-content">
+            <span class="section-tag">Academic Research</span>
+            <h2 class="section-title">About the DiaRisk AI Research Project</h2>
+            <p class="about-lead">
+              <strong>“Early Prediction of Type 2 Diabetes Mellitus using Machine Learning”</strong> is a VTU final-year engineering project addressing global challenges in early metabolic disorder detection.
+            </p>
+            <p>
+              Type 2 Diabetes Mellitus (T2DM) has reached pandemic proportions, driven by genetic susceptibility, sedentary modern lifestyles, and nutritional shifts. Traditional clinical workflows rely on symptomatic testing, which often discovers diabetes only after significant microvascular and macrovascular damage has occurred.
+            </p>
+            <p>
+              This system implements a comprehensive screening pipeline that incorporates 19 multi-domain parameters—from direct clinical laboratory values (HbA1c, fasting glucose) to biometric indices (BMI, waist circumference) and behavioral factors (sleep, stress, diet quality).
+            </p>
+            <div class="about-highlights-grid">
+              <div class="about-highlight-card">
+                <h4>Ensemble Architecture</h4>
+                <p>Combines Random Forest, Logistic Regression, and Gradient Boosting via soft-voting consensus.</p>
+              </div>
+              <div class="about-highlight-card">
+                <h4>Explainable AI (XAI)</h4>
+                <p>Provides transparent factor ranking so clinicians and patients understand why risk was assigned.</p>
+              </div>
+              <div class="about-highlight-card">
+                <h4>Clinical Reference Ranges</h4>
+                <p>All inputs are evaluated against American Diabetes Association (ADA) clinical thresholds.</p>
+              </div>
+              <div class="about-highlight-card">
+                <h4>Production Reliability</h4>
+                <p>Self-contained preprocessing pipeline ensuring zero feature leakage and deterministic predictions.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="about-sidebar-card">
+            <h3 class="sidebar-title">Model Specifications</h3>
+            <ul class="specs-list">
+              <li>
+                <span class="spec-label">Production Pipeline</span>
+                <span class="spec-val">Soft Voting Ensemble</span>
+              </li>
+              <li>
+                <span class="spec-label">Input Biomarkers</span>
+                <span class="spec-val">19 Clinical Features</span>
+              </li>
+              <li>
+                <span class="spec-label">Dataset Cohort</span>
+                <span class="spec-val">100,000 Records</span>
+              </li>
+              <li>
+                <span class="spec-label">Training/Test Split</span>
+                <span class="spec-val">80,000 / 20,000</span>
+              </li>
+              <li>
+                <span class="spec-label">Test Accuracy</span>
+                <span class="spec-val">99.85%</span>
+              </li>
+              <li>
+                <span class="spec-label">Test ROC-AUC</span>
+                <span class="spec-val">0.9999</span>
+              </li>
+              <li>
+                <span class="spec-label">F1-Score</span>
+                <span class="spec-val">0.9912</span>
+              </li>
+              <li>
+                <span class="spec-label">Backend Architecture</span>
+                <span class="spec-val">Python / Flask REST</span>
+              </li>
+            </ul>
+
+            <div class="sidebar-note">
+              <strong>Note:</strong> Performance metrics reflect evaluation on a held-out synthetic test set and are not a measure of real-world clinical diagnostic accuracy.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════════════
+         6. HELP & FREQUENTLY ASKED QUESTIONS (FAQ)
+         ═══════════════════════════════════════════════════════════════ -->
+    <section class="section" id="faq">
+      <div class="container max-w-md">
+        <div class="section-header text-center">
+          <span class="section-tag">Common Inquiries</span>
+          <h2 class="section-title">Frequently Asked Questions</h2>
+          <p class="section-subtitle">
+            Everything you need to know about diabetes early detection, risk scoring, and data security.
+          </p>
+        </div>
+
+        <div class="faq-accordion">
+          <details class="faq-item" open>
+            <summary class="faq-question">
+              <span>What does the DiaRisk AI percentage score mean?</span>
+              <span class="faq-chevron">▾</span>
+            </summary>
+            <div class="faq-answer">
+              The risk percentage reflects the machine-learning model's calibrated probability (0–100%) that a patient's multi-biomarker profile matches patterns associated with Type 2 Diabetes Mellitus. Scores below 20% indicate Low Risk, 20%–49% represent Moderate Risk (pre-diabetic range), and 50% or above indicate High Risk.
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary class="faq-question">
+              <span>Is this screening a substitute for a doctor's diagnosis?</span>
+              <span class="faq-chevron">▾</span>
+            </summary>
+            <div class="faq-answer">
+              No. DiaRisk AI is a clinical decision-support and educational tool designed to encourage timely medical consultation. Definite diabetes diagnosis requires formal laboratory testing ordered by a licensed physician, such as repeated fasting plasma glucose, venous HbA1c, or an Oral Glucose Tolerance Test (OGTT).
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary class="faq-question">
+              <span>What are normal ranges for HbA1c and fasting blood sugar?</span>
+              <span class="faq-chevron">▾</span>
+            </summary>
+            <div class="faq-answer">
+              According to American Diabetes Association (ADA) guidelines:<br>
+              &bull; <strong>Fasting Blood Glucose:</strong> Normal is under 100 mg/dL; Pre-diabetes is 100–125 mg/dL; Diabetes is 126 mg/dL or higher.<br>
+              &bull; <strong>HbA1c (%):</strong> Normal is below 5.7%; Pre-diabetes is 5.7%–6.4%; Diabetes is 6.5% or higher.
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary class="faq-question">
+              <span>Can Type 2 Diabetes or Pre-diabetes be reversed?</span>
+              <span class="faq-chevron">▾</span>
+            </summary>
+            <div class="faq-answer">
+              Pre-diabetes is often fully reversible. Clinical trials (such as the Diabetes Prevention Program) demonstrate that moderate weight loss (5%–7%), at least 150 minutes of weekly aerobic exercise, and a low-glycemic Mediterranean dietary pattern reduce the risk of progressing to Type 2 Diabetes by 58%.
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary class="faq-question">
+              <span>Is my health data stored or shared?</span>
+              <span class="faq-chevron">▾</span>
+            </summary>
+            <div class="faq-answer">
+              No. DiaRisk AI operates strictly in real time. Your entries are passed to the inference endpoint for temporary calculation and are never stored in a permanent database, sold, or shared with third parties.
+            </div>
+          </details>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       7. SITE FOOTER
+       ═══════════════════════════════════════════════════════════════ -->
+  <footer class="site-footer">
+    <div class="container footer-container">
+      <div class="footer-col footer-brand-col">
+        <div class="footer-brand">
+          <span class="footer-logo">🧬</span>
+          <span class="footer-brand-title">DiaRisk <span class="brand-ai">AI</span></span>
+        </div>
+        <p class="footer-desc">
+          Precision predictive intelligence and biomarker risk stratification for Type 2 Diabetes Mellitus. An academic machine-learning research initiative.
+        </p>
+        <div class="footer-badges">
+          <span class="badge-pill-outline">VTU Final Year Project</span>
+          <span class="badge-pill-outline">Python &bull; Flask &bull; Scikit-Learn</span>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h4 class="footer-heading">Navigation</h4>
+        <ul class="footer-links">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#how-it-works">How It Works</a></li>
+          <li><a href="#about">About Project</a></li>
+          <li><a href="#assessment-section">Risk Assessment</a></li>
+          <li><a href="#faq">Help & FAQ</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4 class="footer-heading">Clinical Resources</h4>
+        <ul class="footer-links">
+          <li><a href="https://diabetes.org/" target="_blank" rel="noopener noreferrer">American Diabetes Association</a></li>
+          <li><a href="https://www.who.int/news-room/fact-sheets/detail/diabetes" target="_blank" rel="noopener noreferrer">WHO Diabetes Factsheet</a></li>
+          <li><a href="https://www.cdc.gov/diabetes/basics/prediabetes.html" target="_blank" rel="noopener noreferrer">CDC Pre-diabetes Guide</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col footer-disclaimer-col">
+        <h4 class="footer-heading">Important Disclaimer</h4>
+        <p class="footer-disclaimer-text">
+          DiaRisk AI is an academic machine learning screening tool for educational and decision-support purposes only. It is not an automated medical diagnostic tool. If you have symptoms or concerns regarding diabetes, please consult a qualified healthcare provider immediately.
+        </p>
+      </div>
+    </div>
+
+    <div class="container footer-bottom">
+      <div class="footer-copy">
+        &copy; 2026 DiaRisk AI &bull; Early Prediction of Type 2 Diabetes Mellitus Using Machine Learning. All rights reserved.
+      </div>
+      <div class="footer-bottom-links">
+        <a href="#home">Back to top ↑</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Loading Overlay (Preserved IDs & structure) -->
   <div class="loading-overlay" id="loading-overlay" aria-hidden="true" role="status">
     <div class="loading-spinner"></div>
     <div class="loading-text" id="loading-message">Running diagnostic inference engine...</div>
